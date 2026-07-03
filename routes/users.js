@@ -23,7 +23,8 @@ function insert(doc, key, callback) {
     db.insert(doc, key, function (err) {
       if (err) {
         lastError = err;
-        if (err.status_code === 404) {
+
+        if (err.statusCode === 404) {
           couchdb.db.create(dbName, function (err) {
             if (err) {
               return callback(err);
@@ -62,9 +63,10 @@ module.exports = function () {
         }),
       );
     }
+    user.email = user.email.trim().toLowerCase();
     insert(user, user.email, function (err) {
       if (err) {
-        if (err.status_code === 409) {
+        if (err.statusCode === 409) {
           res.writeHead(409, { "content-Type": "text/html" });
           return res.end(
             layout(templates["new"], "New User", {

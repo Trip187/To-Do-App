@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "@cloudant/cloudant": "^4.5.1",
+    "@ibm-cloud/cloudant": "^0.0.15",
     "bootstrap": "^5.3.8",
+    "dotenv": "^17.4.2",
     "flatiron": "0.4.3",
     "flatware-cookie-parser": "0.1.x",
     "flatware-session": "0.1.x",

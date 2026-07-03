@@ -27,10 +27,12 @@ module.exports = function () {
         }),
       );
     }
-
+    login.email = login.email.trim().toLowerCase();
     db.get(login.email, function (err, user) {
+      console.log("Looking up email:", JSON.stringify(login.email));
       if (err) {
-        if (err.status_code === 404) {
+        console.log(err);
+        if (err.statusCode === 404) {
           return res.end(
             layout(templates["new"], "Log In", { error: "User not found" }),
           );

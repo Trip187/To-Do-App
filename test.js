@@ -45,6 +45,7 @@ can also be defined to be called before (or after) each and every test in the bl
 }); */
 
 //test groups
+/*
 describe("Feature A", function () {
   before(function () {
     console.log("running before function A...");
@@ -80,4 +81,22 @@ describe("Feature A", function () {
       console.log("test A.1.2");
     });
   });
+});
+*/
+require("dotenv").config();
+const Cloudant = require("@cloudant/cloudant");
+
+const cloudant = Cloudant({
+  url: `https://${process.env.CLOUDANT_HOST}`,
+  plugins: { iamauth: { iamApiKey: process.env.CLOUDANT_APIKEY } },
+});
+
+const db = cloudant.db.use("users");
+
+db.get("iangkarari@gmail.com", function (err, doc) {
+  if (err) {
+    console.log("ERROR:", err);
+  } else {
+    console.log("FOUND:", doc);
+  }
 });

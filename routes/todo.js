@@ -1,8 +1,8 @@
 var plates = require("plates"),
   fs = require("fs"),
-  couch = require("../lib/couchDB"),
+  couchdb = require("../lib/couchDB"),
   dbName = "todo",
-  db = couch.use(dbName),
+  db = couchdb.use(dbName),
   layout = require("../templates/layout"),
   loggedIn = require("../templates/middleware/logged_in");
 

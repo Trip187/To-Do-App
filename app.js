@@ -28,5 +28,5 @@ app.router.path("/todo", require("./routes/todo"));
 module.exports = app;
 
 if (process.mainModule === module) {
-  app.start(3000);
+  app.start(process.env.PORT || 3000);
 }
