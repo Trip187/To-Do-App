@@ -3,7 +3,7 @@ var Plates = require("plates"),
   couchdb = require("../lib/couchDB"),
   layout = require("../templates/layout"), // ✅ one require, here
   dbName = "users",
-  db = couchdb.use(dbName);
+  db = couchdb.db.use(dbName);
 
 var templates = {
   new: fs.readFileSync(__dirname + "/../templates/session/new.html", "utf8"),

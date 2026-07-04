@@ -2,7 +2,7 @@ var plates = require("plates"),
   fs = require("fs"),
   couchdb = require("../lib/couchDB"),
   dbName = "todo",
-  db = couchdb.use(dbName),
+  db = couchdb.db.use(dbName),
   layout = require("../templates/layout"),
   loggedIn = require("../templates/middleware/logged_in");
 
