@@ -1,7 +1,7 @@
 var fs = require("fs"),
   couchdb = require("../lib/couchDB"),
   dbName = "users",
-  db = couchdb.use(dbName),
+  db = couchdb.db.use(dbName),
   Plates = require("plates"),
   layout = require("../templates/layout");
 

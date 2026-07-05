@@ -20,14 +20,14 @@ function insert(email, todo, callback) {
     if (tries >= 3) return callback(lastError);
 
     db.get(email, function (err, todos) {
-      if (err && err.status_code !== 404) return callback(err);
+      if (err && err.statusCode !== 404) return callback(err);
 
       if (!todos) todos = { todos: [] };
       todos.todos.unshift(todo);
 
       db.insert(todos, email, function (err) {
         if (err) {
-          if (err.status_code === 404) {
+          if (err.statusCode === 404) {
             lastError = err;
             // database does not exist, need to create it
             couchdb.db.create(dbName, function (err) {
@@ -50,10 +50,15 @@ module.exports = function () {
   this.get("/", [
     loggedIn(),
     function () {
+      console.log("Entered /todo");
+      console.log("Session user:", this.req.session.user);
       var res = this.res;
 
+      console.log("Looking for todo document:", this.req.session.user.email);
       db.get(this.req.session.user.email, function (err, todos) {
-        if (err && err.status_code !== 404) {
+        console.log("Todo error:", err);
+        console.log("Todo document:", todos);
+        if (err && err.statusCode !== 404) {
           res.writeHead(500);
           return res.end(err.stack);
         }
@@ -63,12 +68,14 @@ module.exports = function () {
 
         todos.forEach(function (todo, idx) {
           if (todo) todo.pos = idx + 1;
+          todo.created = new Date(todo.created_at).toLocaleString();
         });
 
         var map = plates.Map();
         map.className("todo").to("todo");
         map.className("pos").to("pos");
         map.className("what").to("what");
+        map.className("created").to("created");
         map.where("name").is("pos").use("pos").as("value");
 
         var main = plates.bind(templates.index, { todo: todos }, map);

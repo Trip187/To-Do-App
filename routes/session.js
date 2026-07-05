@@ -31,7 +31,10 @@ module.exports = function () {
     db.get(login.email, function (err, user) {
       console.log("Looking up email:", JSON.stringify(login.email));
       if (err) {
-        console.log(err);
+        console.log("Full error:", err);
+        console.log("statusCode:", err && err.statusCode);
+        console.log("status_code:", err && err.status_code);
+        console.log("message:", err && err.message);
         if (err.statusCode === 404) {
           return res.end(
             layout(templates["new"], "Log In", { error: "User not found" }),
