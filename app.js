@@ -20,7 +20,10 @@ app.use(flatiron.plugins.http, {
     },
   ],
 });
-
+app.router.get("/", function () {
+  this.res.writeHead(302, { Location: "/session/new" });
+  this.res.end();
+});
 app.router.path("/users", require("./routes/users"));
 app.router.path("/session", require("./routes/session"));
 app.router.path("/todo", require("./routes/todo"));
