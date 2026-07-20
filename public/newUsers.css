@@ -1,0 +1,10 @@
+.loginContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background-color: white;
+  border: 1px solid var(--bs-secondary-border-black);
+}

@@ -1,35 +1,49 @@
-<h1 class="h1">Your To-Dos</h1>
-
-<a
-  class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-  href="/todo/new"
-  >New To-Do</a
->
-<a
-  class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-  href="/session/new"
-  >Log Out</a
->
-<table class="table">
-  <thead class="table-dark">
-    <tr>
-      <th>#</th>
-      <th>What</th>
-      <th>Created</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody id="todo-list">
-    <tr class="todo">
-      <td class="pos"></td>
-      <td class="what"></td>
-      <td class="created"></td>
-      <td class="remove">
-        <form action="/todo/delete" method="POST">
-          <input type="hidden" name="pos" value="" />
-          <input type="submit" name="Delete" value="Delete" />
-        </form>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="todoContainer">
+  <h1 class="h1">Your To-Dos</h1>
+  <div class="weather">
+    <h3 class="city"></h3>
+    <p>🌡 Temperature: <span class="temperature"></span> °C</p>
+    <p>☁ Weather: <span class="description"></span></p>
+  </div>
+  <a
+    class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+    href="/todo/new"
+    >New To-Do</a
+  >
+  <a
+    class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+    href="/session/new"
+    >Log Out</a
+  >
+  <table class="table">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>What</th>
+        <th>Created</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="todo-list">
+      <tr class="todo">
+        <td class="pos"></td>
+        <td class="what"></td>
+        <td class="created"></td>
+        <td class="remove">
+          <form action="/todo/delete" method="POST">
+            <input type="hidden" name="pos" value="" />
+            <input type="submit" name="Delete" value="Delete" />
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="news-list">
+    <div class="news">
+      <h2 class="title"></h2>
+      <p class="news-description"></p>
+      <img class="image" src="" alt="News image" />
+      <a class="url" target="_blank">Read More</a>
+    </div>
+  </div>
+</div>

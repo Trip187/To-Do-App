@@ -1,6 +1,8 @@
 var plates = require("plates"),
   fs = require("fs"),
   couchdb = require("../lib/couchDB"),
+  getWeather = require("../weatherApi"),
+  getNews = require("../currentNews"),
   dbName = "todo",
   db = couchdb.db.use(dbName),
   layout = require("../templates/layout"),
@@ -52,35 +54,74 @@ module.exports = function () {
     function () {
       console.log("Entered /todo");
       console.log("Session user:", this.req.session.user);
+
       var res = this.res;
 
       console.log("Looking for todo document:", this.req.session.user.email);
-      db.get(this.req.session.user.email, function (err, todos) {
+
+      db.get(this.req.session.user.email, async function (err, todos) {
         console.log("Todo error:", err);
         console.log("Todo document:", todos);
+
         if (err && err.statusCode !== 404) {
           res.writeHead(500);
           return res.end(err.stack);
         }
 
-        if (!todos) todos = { todos: [] };
+        if (!todos) {
+          todos = { todos: [] };
+        }
+
         todos = todos.todos;
 
         todos.forEach(function (todo, idx) {
-          if (todo) todo.pos = idx + 1;
+          todo.pos = idx + 1;
           todo.created = new Date(todo.created_at).toLocaleString();
         });
 
-        var map = plates.Map();
-        map.className("todo").to("todo");
-        map.className("pos").to("pos");
-        map.className("what").to("what");
-        map.className("created").to("created");
-        map.where("name").is("pos").use("pos").as("value");
+        try {
+          const weather = await getWeather("Nairobi");
+          const news = await getNews();
 
-        var main = plates.bind(templates.index, { todo: todos }, map);
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.end(layout(main, "To-Dos"));
+          var map = plates.Map();
+
+          map.className("todo").to("todo");
+          map.className("pos").to("pos");
+          map.className("what").to("what");
+          map.className("created").to("created");
+
+          map.className("city").to("city");
+          map.className("temperature").to("temperature");
+          map.className("description").to("description");
+
+          map.className("news").to("news");
+          map.className("title").to("title");
+          map.className("news-description").to("description");
+          map.className("url").to("url");
+          map.where("class").is("image").use("image").as("src");
+          map.className("url").to("url").as("href");
+          map.where("name").is("pos").use("pos").as("value");
+
+          var main = plates.bind(
+            templates.index,
+            {
+              todo: todos,
+              city: weather.name,
+              temperature: weather.main.temp,
+              description: weather.weather[0].description,
+              //current News
+              news: news.slice(0, 4),
+            },
+            map,
+          );
+
+          res.writeHead(200, { "Content-Type": "text/html" });
+          res.end(layout(main, "To-Dos"));
+        } catch (err) {
+          console.error("Weather Error:", err);
+          res.writeHead(500);
+          res.end("Unable to retrieve weather.");
+        }
       });
     },
   ]);
