@@ -3,18 +3,28 @@
   <div class="weather">
     <h3 class="city"></h3>
     <p>🌡 Temperature: <span class="temperature"></span> °C</p>
-    <p>☁ Weather: <span class="description"></span></p>
+
+    <div class="weather-condition">
+      <img class="weather-icon" src="" alt="Weather Icon" />
+      <span class="description"></span>
+    </div>
   </div>
-  <a
-    class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-    href="/todo/new"
-    >New To-Do</a
-  >
-  <a
-    class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-    href="/session/new"
-    >Log Out</a
-  >
+  <div class="navLinks">
+    <p>
+      <a
+        href="/todo/new"
+        class="newTodo link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+        >Add To-Do</a
+      >
+    </p>
+    <p>
+      <a
+        href="/session/new"
+        class="logout link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+        >Log Out</a
+      >
+    </p>
+  </div>
   <table class="table">
     <thead class="table-dark">
       <tr>

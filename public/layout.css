@@ -1,6 +1,19 @@
+html {
+  margin: 0;
+  padding: 0;
+}
 body {
+  margin: 0;
   background-color: var(--bs-secondary-bg-subtle);
     min-height: 100vh;
+
+}
+body:has(.loginPage) {
+  background-image: url('/images/bg1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
 }
 .todoContainer {
   max-width: 1200px;

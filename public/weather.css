@@ -1,0 +1,25 @@
+.weather {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.weather-condition {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.weather-icon {
+    width: 40px;
+    height: 40px;
+}
+.newTodo{
+   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.logout{
+   display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}

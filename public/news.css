@@ -1,6 +1,6 @@
 #news-list {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 10px;
     margin-top: 30px;
 }
@@ -9,6 +9,14 @@
     border: 1px solid #ddd;
     padding: 15px;
     border-radius: 8px;
-    overflow: clip;
-    width: 450px;
+    overflow: hidden;
+    width: 100%;
+    height: 600px;
+    box-sizing: border-box;
+}
+.news img {
+    width: 100%;
+    height: 250px;      /* Same height for every image */
+    object-fit: cover;  /* Crops to fill the box */
+    display: block;
 }

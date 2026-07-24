@@ -1,27 +1,43 @@
-<div class="loginContainer">
-  <h1>Log in</h1>
-  <form action="/session" method="POST">
-    <p>
-      <label for="email">E-mail</label>
-      <input
-        type="floatingInputValue"
-        name="email"
-        value=""
-        id="email"
-        required
-      />
-    </p>
-    <p>
-      <label for="password">Password</label>
-      <input
-        type="password
-    "
-        name="password"
-        id="password"
-        value=""
-        required
-      />
-    </p>
-    <input type="submit" value="Log In" />
-  </form>
+<div class="loginPage">
+  <div class="loginContainer card p-4 shadow-sm">
+    <h1 class="mb-4 text-center">Log in</h1>
+    <form action="/session" method="POST">
+      <div class="mb-3 row align-items-center">
+        <label for="email" class="col-3 col-form-label">E-mail</label>
+        <div class="col-9">
+          <input
+            type="email"
+            name="email"
+            value=""
+            id="email"
+            class="form-control"
+            required
+          />
+        </div>
+      </div>
+      <div class="mb-3 row align-items-center">
+        <label for="password" class="col-3 col-form-label">Password</label>
+        <div class="col-9">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value=""
+            class="form-control"
+            required
+          />
+        </div>
+      </div>
+      <div class="d-grid">
+        <input type="submit" value="Log In" class="btn btn-primary" />
+      </div>
+      <p>
+        don't have an account ?<a
+          href="/users/new"
+          class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+          >sign up here</a
+        >
+      </p>
+    </form>
+  </div>
 </div>

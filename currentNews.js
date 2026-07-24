@@ -8,7 +8,7 @@ async function getNews() {
     }
 
     const data = await response.json();
-    console.log(data);
+
     return data.news;
   } catch (err) {
     console.log(err);

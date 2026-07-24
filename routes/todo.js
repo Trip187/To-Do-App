@@ -81,6 +81,7 @@ module.exports = function () {
 
         try {
           const weather = await getWeather("Nairobi");
+          console.log(weather);
           const news = await getNews();
 
           var map = plates.Map();
@@ -93,6 +94,7 @@ module.exports = function () {
           map.className("city").to("city");
           map.className("temperature").to("temperature");
           map.className("description").to("description");
+          map.className("weather-icon").to("weatherIcon").as("src");
 
           map.className("news").to("news");
           map.className("title").to("title");
@@ -101,7 +103,9 @@ module.exports = function () {
           map.where("class").is("image").use("image").as("src");
           map.className("url").to("url").as("href");
           map.where("name").is("pos").use("pos").as("value");
-
+          console.log({
+            weatherIcon: `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`,
+          });
           var main = plates.bind(
             templates.index,
             {
@@ -109,8 +113,9 @@ module.exports = function () {
               city: weather.name,
               temperature: weather.main.temp,
               description: weather.weather[0].description,
+              weatherIcon: `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`,
               //current News
-              news: news.slice(0, 4),
+              news: news.slice(0, 6),
             },
             map,
           );
